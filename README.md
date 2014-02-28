@@ -14,7 +14,7 @@ iOS 7 style blurred view controller that appears on top of your view controller.
 
 ## Demo
 
-Build and run the `REFrostedViewControllerExample` project in Xcode to see `REFrostedViewController` in action.
+Build and run the `REFrostedViewControllerExample` project in Xamarin Studio to see `REFrostedViewController` in action.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Build and run the `REFrostedViewControllerExample` project in Xcode to see `REFr
 
 I left the built DLL files in the bin directorys of the binding project. If they do not work for you, open the solution and re-build the DLLs and those new files.
 
-
+Simply reference the REFrostedMenu.Dll in your iOS app project. Add a `using REFrostedMenu;` to get access to the types.
 
 ## Example Usage
 
