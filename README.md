@@ -14,7 +14,7 @@ iOS 7 style blurred view controller that appears on top of your view controller.
 
 ## Demo
 
-Build and run the `REFrostedVMenuExample` project in Xamarin Studio to see `REFrostedViewController` in action.
+Build and run the `REFrostedMenuExample` project in Xamarin Studio to see `REFrostedViewController` in action.
 
 ## Installation
 
