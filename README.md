@@ -1,15 +1,16 @@
-# REFrostedViewController
+# REFrostedViewController for Xamarin.iOS
+
+A Xamarin.iOS Binding for [REFrostedViewController](https://github.com/romaonthego/REFrostedViewController)
 
 iOS 7 style blurred view controller that appears on top of your view controller.
 
-<img src="https://github.com/romaonthego/REFrostedViewController/raw/master/Screenshot.png" alt="REFrostedViewController Screenshot" width="400" height="568" />
-<img src="https://github.com/romaonthego/REFrostedViewController/raw/master/Demo.gif" alt="REFrostedViewController Screenshot" width="320" height="568" />
+<img src="https://github.com/therealjohn/REFrostedViewController/raw/master/Screenshot.png" alt="REFrostedViewController Screenshot" width="400" height="568" />
+<img src="https://github.com/therealjohn/REFrostedViewController/raw/master/Demo.gif" alt="REFrostedViewController Screenshot" width="320" height="568" />
 
 ## Requirements
+* Xamarin.iOS
 * Xcode 5 or higher
-* Apple LLVM compiler
 * iOS 6.0 or higher
-* ARC
 
 ## Demo
 
@@ -17,128 +18,15 @@ Build and run the `REFrostedViewControllerExample` project in Xcode to see `REFr
 
 ## Installation
 
-### CocoaPods
+### DLLs
 
-The recommended approach for installating `REFrostedViewController` is via the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
-For best results, it is recommended that you install via CocoaPods >= **0.28.0** using Git >= **1.8.0** installed via Homebrew.
+I left the built DLL files in the bin directorys of the binding project. If they do not work for you, open the solution and re-build the DLLs and those new files.
 
-Install CocoaPods if not already available:
 
-``` bash
-$ [sudo] gem install cocoapods
-$ pod setup
-```
-
-Change to the directory of your Xcode project:
-
-``` bash
-$ cd /path/to/MyProject
-$ touch Podfile
-$ edit Podfile
-```
-
-Edit your Podfile and add REFrostedViewController:
-
-``` bash
-platform :ios, '6.0'
-pod 'REFrostedViewController', '~> 2.4.4'
-```
-
-Install into your Xcode project:
-
-``` bash
-$ pod install
-```
-
-Open your project in Xcode from the .xcworkspace file (not the usual project file)
-
-``` bash
-$ open MyProject.xcworkspace
-```
-
-Please note that if your installation fails, it may be because you are installing with a version of Git lower than CocoaPods is expecting. Please ensure that you are running Git >= **1.8.0** by executing `git --version`. You can get a full picture of the installation details by executing `pod install --verbose`.
-
-### Manual Install
-
-All you need to do is drop `REFrostedViewController` files into your project, and add `#include "REFrostedViewController.h"` to the top of classes that will use it.
-
-Your project must be linked against the `Accelerate` framework.
 
 ## Example Usage
 
-In your AppDelegate's `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` create the view controller and assign content and menu view controllers.
-
-``` objective-c
-// Create content and menu controllers
-//
-DEMONavigationController *navigationController = [[DEMONavigationController alloc] initWithRootViewController:[[DEMOHomeViewController alloc] init]];
-DEMOMenuViewController *menuController = [[DEMOMenuViewController alloc] initWithStyle:UITableViewStylePlain];
-
-// Create frosted view controller
-//
-REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-
-// Make it a root controller
-//
-self.window.rootViewController = frostedViewController;
-```
-
-You can present it manually:
-
-```objective-c
-[self.frostedViewController presentMenuViewController];
-```
-
-or using a pan gesture recognizer:
-
-```objective-c
-- (void)panGestureRecognized:(UIPanGestureRecognizer *)sender
-{
-    [self.frostedViewController panGestureRecognized:sender];
-}
-```
-
-### Live Blur
-
-By default, live blurring is enabled under iOS 7. The live blurring is performed by using a `UIToolbar` as a background view, that means when you change its tint color, it becomes desaturated. That's the way it works on iOS 7. iPhone 4 doesn't support live blur and falls back to a transparent view. This also applies to when a user device has high contrast accessibility setting set to on.
-To disable live blurring, set `liveBlur` property to `NO`.
-
-## Storyboards Example
-
-1. Create a subclass of `REFrostedViewController`. In this example we call it `DEMORootViewController`.
-2. In the Storyboard designate the root view's owner as `DEMORootViewController`.
-3. Make sure to `#import "REFrostedViewController.h"` in `DEMORootViewController.h`.
-4. Add more view controllers to your Storyboard, and give them identifiers "menuController" and "contentController". Note that in the new XCode the identifier is called "Storyboard ID" and can be found in the Identity inspector.
-5. Add a method `awakeFromNib` to `DEMORootViewController.m` with the following code:
-
-```objective-c
-
-- (void)awakeFromNib
-{
-    self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-    self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
-}
-
-```
-
-## Customization
-
-You can customize the following properties of `REFrostedViewController`:
-
-``` objective-c
-@property (strong, readonly, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
-@property (assign, readwrite, nonatomic) BOOL panGestureEnabled;
-@property (assign, readwrite, nonatomic) REFrostedViewControllerDirection direction;
-@property (strong, readwrite, nonatomic) UIColor *blurTintColor;
-@property (assign, readwrite, nonatomic) CGFloat blurRadius; // Used only when live blur is off
-@property (assign, readwrite, nonatomic) CGFloat blurSaturationDeltaFactor; // Used only when live blur is off
-@property (assign, readwrite, nonatomic) NSTimeInterval animationDuration;
-@property (assign, readwrite, nonatomic) BOOL limitMenuViewSize;
-@property (assign, readwrite, nonatomic) CGSize menuViewSize;
-@property (assign, readwrite, nonatomic) BOOL liveBlur; // iOS 7 only
-@property (assign, readwrite, nonatomic) REFrostedViewControllerLiveBackgroundStyle liveBlurBackgroundStyle; // iOS 7 only
-```
+There is an included sample project that is a direct port of the original "simple" sample. 
 
 ## Credits
 
@@ -146,7 +34,7 @@ Inspired by a [Dribbble shot](http://dribbble.com/shots/1173945-Menu-Concept-1),
 
 The blur algorithm that is used for static blur comes from WWDC 2013's session 208, "What's New in iOS User Interface Design".
 
-## Contact
+## Original Author
 
 Roman Efimov
 
